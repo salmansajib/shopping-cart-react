@@ -1,8 +1,17 @@
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Cart from './pages/Cart';
+import Header from './components/Header';
+
 function App() {
   return (
-    <>
-      <h1 className=' text-5xl '>Hello React</h1>
-    </>
+    <div>
+      <Header />
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+      </Routes>
+    </div>
   );
 }
 
