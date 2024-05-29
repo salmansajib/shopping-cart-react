@@ -7,21 +7,24 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   async function fetchListOfProducts() {
-    setLoading(true);
-    const response = await fetch('https://fakestoreapi.com/products');
-    const data = await response.json();
-
-    if (data) {
-      setLoading(false);
-      setProducts(data);
+    try {
+      setLoading(true);
+      const response = await fetch('https://fakestoreapi.com/products');
+      const data = await response.json();
+      if (data) {
+        setProducts(data);
+      }
+    } catch (error) {
+      console.log(error);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
     fetchListOfProducts();
   }, []);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div>
@@ -35,13 +38,13 @@ function Home() {
           />
         </div>
       ) : (
-        <div className=' min-h-[80vh] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl mx-auto p-3 '>
+        <section className=' min-h-[80vh] grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl mx-auto p-3 '>
           {products && products.length
             ? products.map((productsItem) => (
                 <ProductTile key={productsItem.id} product={productsItem} />
               ))
             : null}
-        </div>
+        </section>
       )}
     </div>
   );
