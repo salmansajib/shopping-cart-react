@@ -12,12 +12,13 @@ function Home() {
       const response = await fetch('https://fakestoreapi.com/products');
       const data = await response.json();
       if (data) {
+        setLoading(false);
         setProducts(data);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
